@@ -1,4 +1,4 @@
-1-- Adminer 4.8.1 MySQL 5.7.39 dump
+-- Adminer 4.8.1 MySQL 5.7.34 dump
 
 SET NAMES utf8;
 SET time_zone = '+00:00';
@@ -18,6 +18,15 @@ CREATE TABLE `Ban` (
   CONSTRAINT `fk_Ban_adminID` FOREIGN KEY (`adminID`) REFERENCES `User` (`userID`),
   CONSTRAINT `fk_Ban_userID` FOREIGN KEY (`userID`) REFERENCES `User` (`userID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
+DROP TABLE IF EXISTS `Category`;
+CREATE TABLE `Category` (
+  `categoryID` int(11) NOT NULL,
+  `categoryName` varchar(255) NOT NULL,
+  `categoryColor` varchar(255) NOT NULL,
+  PRIMARY KEY (`categoryID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
 DROP TABLE IF EXISTS `Comments`;
@@ -68,6 +77,19 @@ CREATE TABLE `Problem` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 
+DROP TABLE IF EXISTS `ProblemCategory`;
+CREATE TABLE `ProblemCategory` (
+  `problemCategoryID` int(11) NOT NULL,
+  `categoryID` int(11) NOT NULL,
+  `problemID` int(11) NOT NULL,
+  PRIMARY KEY (`problemCategoryID`),
+  KEY `fk_ProblemCategory_problemID` (`problemID`),
+  KEY `fk_ProblemCategory_categoryID` (`categoryID`),
+  CONSTRAINT `fk_ProblemCategory_categoryID` FOREIGN KEY (`categoryID`) REFERENCES `Category` (`categoryID`),
+  CONSTRAINT `fk_ProblemCategory_problemID` FOREIGN KEY (`problemID`) REFERENCES `Problem` (`problemID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
 DROP TABLE IF EXISTS `ProblemModify`;
 CREATE TABLE `ProblemModify` (
   `problemModifyID` int(11) NOT NULL,
@@ -108,6 +130,7 @@ CREATE TABLE `User` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 INSERT INTO `User` (`userID`, `firstName`, `lastName`, `mail`, `username`, `profilePictureUrl`, `userLevel`, `password`) VALUES
-(1,	'Julien',	'Pierson',	'frajuju.fp@gmail.com',	'Pierson38',	'kd',	2,	'jj');
+(1,	'Juliend',	'Pierson',	'frajuju.fp@gmail.com',	'Pierson38',	'kd',	2,	'jj'),
+(2,	'htthh',	'nhhnn',	'gtth@gmail.com',	'bgnn',	'd',	2,	'oo');
 
--- 2022-09-22 07:31:05
+-- 2022-09-22 13:00:20
