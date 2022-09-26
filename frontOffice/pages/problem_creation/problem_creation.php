@@ -1,5 +1,4 @@
 <html>
-    
     <head>
        
     </head>
@@ -15,11 +14,31 @@
                 <input type="text" name="error_code" id="Error_Code"/>
             </div>
             <div>
-                <php
-                    include 'SQLconfigphp' ;
-                    $bdd=mysql_connect(); 
-                    $sql =''
+
+                <?php
+                include 'test.php';
+                $i=0;
+                $id=1;
+                $c=0;
+               
+
+                while($i<$sot)
+                {
+                    $i=$i+1;
+                    $id=$id+1;
+                    ?>
+                    <div>
+                        <label for="<?php $id ?>"><?php echo $TableauC[$c] ?><label>
+                        <input type ="checkbox" id="<?php $id ?>" name="<?= $TableauC[$c] ?>"></input>
+                    </div>
+                    <?php
+                    $c=$c+1;
+                    
+                    
+                }
+
                 ?>
+
 
                 <!--<div>
                     <label for="PHP">PHP</label>
@@ -32,7 +51,7 @@
                 <div>
                     <label for="JS">javascript</label>
                     <input type="checkbox" id="JS" name="javascript"/>
-                </div> -->
+                </div>-->
             </div>
             <div>
                 <label for="Description">description</label>

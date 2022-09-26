@@ -2,6 +2,9 @@
 <?php
 
 
+include 'test.php';
+
+
 $NameP = $_POST["proposal_name"];
 
 $ereurCode = $_POST["error_code"];
@@ -25,22 +28,40 @@ echo " info ereur: ".  $ereurCode;
 ///
 
 echo " info type : ";
+$categori=array();
 
-if (isset($_POST['php'])) 
+$Y=0;
+
+for($I = 0; $I< $sot ; $I++)
+
 {
-     echo " php ";
+
+if (isset($_POST[$TableauC[$Y]])) 
+{
+     //echo $TableauC[$Y];
+     array_push($categori,$TableauC[$Y]);
+
 }
-if (isset($_POST['html'])) 
+else
 {
-    echo " html ";
+      //echo " y'as un probléme ";
 }
-if (isset($_POST['javascript']))
-{
-       echo " javascript ";
+
+$Y=$Y+1;
+
 }
-if (!isset($_POST['php'])&!isset($_POST['html'])&!isset($_POST['javascript']))
+$ok=0;
+for ($ligne = 0; $ligne<$sot;$ligne++)
 {
-      echo " y'as rien ";
+    if (isset($categori[$ok]))
+    {
+        echo $categori[$ok];
+    }
+    else
+    {
+        echo " vide ";
+    }
+    $ok=$ok+1;   
 }
 
 
@@ -60,6 +81,7 @@ if (isset($_FILES['picture_example']) && $_FILES['picture_example']['error'] == 
             $photo = $newName.".".$fileInfo['extension'];
 
             move_uploaded_file($_FILES['picture_example']['tmp_name'], '../test/photo/' . $photo);
+            $photo='../test/photo/'.$photo;
 
             //$update = $bdd->prepare('UPDATE visite SET photo = ? WHERE id = ?');
             //$update->execute([$photo, $id]);
@@ -79,6 +101,23 @@ if (isset($_FILES['picture_example']) && $_FILES['picture_example']['error'] == 
 else
 {
     echo " rien ";
+}
+
+
+
+
+//$bdd->query("INSERT INTO problem (`userID`, `title`, `description`, `codeError`, `solution`, `view`, `status`, `linkToScreen`, `dateOfPublication`) 
+                    //VALUES(1,'".$NameP."','".$description."','".$ereurCode."','aucune',0,0,'../test/photo/".$photo."',../test/photo/)");
+
+$sql = "INSERT INTO problem (userID, title, description, codeError, solution, view, status, linkToScreen) VALUES (?,?,?,?,?,?,?, ?);";
+
+
+try {
+    $stmt = $bdd->prepare($sql);
+    $stmt->execute([1,$NameP,$description,$ereurCode,'rien',0,0,$photo]);
+} catch (PDOException $e) {
+    $message = $e->getMessage();
+    echo $message;
 }
 
 
