@@ -106,19 +106,27 @@ else
 
 
 
-//$bdd->query("INSERT INTO problem (`userID`, `title`, `description`, `codeError`, `solution`, `view`, `status`, `linkToScreen`, `dateOfPublication`) 
+if(isset($_SESSION['userID']))
+
+{
+
+    //$bdd->query("INSERT INTO problem (`userID`, `title`, `description`, `codeError`, `solution`, `view`, `status`, `linkToScreen`, `dateOfPublication`) 
                     //VALUES(1,'".$NameP."','".$description."','".$ereurCode."','aucune',0,0,'../test/photo/".$photo."',../test/photo/)");
 
-$sql = "INSERT INTO problem (userID, title, description, codeError, solution, view, status, linkToScreen) VALUES (?,?,?,?,?,?,?, ?);";
+    $sql = "INSERT INTO problem (userID, title, description, codeError, solution, view, status, linkToScreen) VALUES (?,?,?,?,?,?,?, ?);";
 
 
-try {
+    try {
     $stmt = $bdd->prepare($sql);
     $stmt->execute([1,$NameP,$description,$ereurCode,'rien',0,0,$photo]);
-} catch (PDOException $e) {
+    } catch (PDOException $e) {
     $message = $e->getMessage();
     echo $message;
+    }
 }
-
+else
+{
+    echo "vous devais etre conecter pour pouvoir envoyer une proposition de fiche problem"
+}
 
 ?>
