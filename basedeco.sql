@@ -5,6 +5,10 @@ SET time_zone = '+00:00';
 SET foreign_key_checks = 0;
 SET sql_mode = 'NO_AUTO_VALUE_ON_ZERO';
 
+DROP DATABASE IF EXISTS `basedeco`;
+CREATE DATABASE `basedeco` /*!40100 DEFAULT CHARACTER SET utf8 */;
+USE `basedeco`;
+
 DROP TABLE IF EXISTS `ban`;
 CREATE TABLE `ban` (
   `banID` int(11) NOT NULL AUTO_INCREMENT,
@@ -14,12 +18,10 @@ CREATE TABLE `ban` (
   PRIMARY KEY (`banID`),
   KEY `fk_Ban_userID` (`userID`),
   KEY `fk_Ban_adminID` (`adminID`),
-  CONSTRAINT `fk_Ban_adminID` FOREIGN KEY (`adminID`) REFERENCES `User` (`userID`),
-  CONSTRAINT `fk_Ban_userID` FOREIGN KEY (`userID`) REFERENCES `User` (`userID`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+  CONSTRAINT `ban_ibfk_1` FOREIGN KEY (`userID`) REFERENCES `User` (`userID`) ON DELETE CASCADE,
+  CONSTRAINT `fk_Ban_adminID` FOREIGN KEY (`adminID`) REFERENCES `User` (`userID`)
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
 
-INSERT INTO `ban` (`banID`, `userID`, `banDate`, `adminID`) VALUES
-(2,	5,	1695398566420,	1);
 
 DROP TABLE IF EXISTS `category`;
 CREATE TABLE `category` (
@@ -36,9 +38,10 @@ CREATE TABLE `Comments` (
   `userID` int(11) NOT NULL,
   `problemID` int(11) NOT NULL,
   `message` varchar(255) NOT NULL,
-  `numberUpVote` int(11) NOT NULL,
-  `numberDownVote` int(11) NOT NULL,
+  `numberUpVote` int(11) NOT NULL DEFAULT '0',
+  `numberDownVote` int(11) NOT NULL DEFAULT '0',
   `respondTo` int(11) DEFAULT NULL,
+  `dateOfPublication` datetime NOT NULL,
   PRIMARY KEY (`commentID`),
   KEY `fk_Comments_userID` (`userID`),
   KEY `fk_Comments_problemID` (`problemID`),
@@ -63,7 +66,7 @@ CREATE TABLE `notification` (
 DROP TABLE IF EXISTS `problem`;
 CREATE TABLE `problem` (
   `problemID` int(11) NOT NULL AUTO_INCREMENT,
-  `userID` int(11) NOT NULL,
+  `userID` int(11) DEFAULT NULL,
   `title` varchar(255) NOT NULL,
   `description` text NOT NULL,
   `codeError` varchar(255) NOT NULL,
@@ -71,14 +74,14 @@ CREATE TABLE `problem` (
   `view` int(11) NOT NULL,
   `status` int(11) NOT NULL,
   `linkToScreen` varchar(255) NOT NULL,
-  `dateOfPublication` date NOT NULL,
+  `dateOfPublication` datetime NOT NULL ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`problemID`),
   KEY `fk_Problem_userID` (`userID`),
   CONSTRAINT `fk_Problem_userID` FOREIGN KEY (`userID`) REFERENCES `User` (`userID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 INSERT INTO `problem` (`problemID`, `userID`, `title`, `description`, `codeError`, `solution`, `view`, `status`, `linkToScreen`, `dateOfPublication`) VALUES
-(1,	1,	'Probleme d\'acces a une page',	'Illud tamen te esse admonitum volo, primum ut qualis es talem te esse omnes existiment ut, quantum a rerum turpitudine abes, tantum te a verborum libertate seiungas; deinde ut ea in alterum ne dicas, quae cum tibi falso responsa sint, erubescas. Quis est enim, cui via ista non pateat, qui isti aetati atque etiam isti dignitati non possit quam velit petulanter, etiamsi sine ulla suspicione, at non sine argumento male dicere? Sed istarum partium culpa est eorum, qui te agere voluerunt; laus pudoris tui, quod ea te invitum dicere videbamus, ingenii, quod ornate politeque dixisti.\r\n',	'404',	'Illud tamen te esse admonitum volo, primum ut qualis es talem te esse omnes existiment ut, quantum a rerum turpitudine abes, tantum te a verborum libertate seiungas; deinde ut ea in alterum ne dicas, quae cum tibi falso responsa sint, erubescas. Quis est enim, cui via ista non pateat, qui isti aetati atque etiam isti dignitati non possit quam velit petulanter, etiamsi sine ulla suspicione, at non sine argumento male dicere? Sed istarum partium culpa est eorum, qui te agere voluerunt; laus pudoris tui, quod ea te invitum dicere videbamus, ingenii, quod ornate politeque dixisti.\r\n',	3,	1,	'\"\"',	'2022-09-26');
+(1,	1,	'pppopopopo',	'oiojcjjjjjjjjjjjjjoiojcjjjjjjjjjjjjjoiojcjjjjjjjjjjjjj',	'0987',	'oiojcjjjjjjjjjjjjjoiojcjjjjjjjjjjjjjoiojcjjjjjjjjjjjjj',	3,	2,	'\"\"',	'2022-09-28 11:20:36');
 
 DROP TABLE IF EXISTS `ProblemCategory`;
 CREATE TABLE `ProblemCategory` (
@@ -97,13 +100,16 @@ DROP TABLE IF EXISTS `ProblemModify`;
 CREATE TABLE `ProblemModify` (
   `problemModifyID` int(11) NOT NULL AUTO_INCREMENT,
   `problemID` int(11) NOT NULL,
-  `title` varchar(255) NOT NULL,
-  `description` varchar(255) NOT NULL,
-  `linkToScreen` varchar(255) NOT NULL,
+  `newTitle` varchar(255) NOT NULL,
+  `newCodeError` varchar(255) NOT NULL,
+  `newDescription` varchar(255) NOT NULL,
+  `newSolution` varchar(255) NOT NULL,
+  `newLinkToScreen` varchar(255) NOT NULL,
+  `dateOfModification` datetime NOT NULL ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`problemModifyID`),
   KEY `fk_ProblemModify_problemID` (`problemID`),
   CONSTRAINT `fk_ProblemModify_problemID` FOREIGN KEY (`problemID`) REFERENCES `Problem` (`problemID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
 
 DROP TABLE IF EXISTS `report`;
@@ -130,10 +136,10 @@ CREATE TABLE `User` (
   `password` varchar(255) NOT NULL,
   `date_creation_account` date NOT NULL,
   PRIMARY KEY (`userID`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 
 INSERT INTO `User` (`userID`, `firstName`, `lastName`, `mail`, `username`, `profilePictureUrl`, `userLevel`, `password`, `date_creation_account`) VALUES
-(1,	'Juliend',	'Pierson',	'frajuju.fp@gmail.com',	'Pierson38',	'kd',	2,	'jj',	'2022-09-26'),
-(5,	'sd',	'sd',	'sd',	'sd',	'ds',	1,	'sd',	'2022-09-26');
+(1,	'Julien',	'Pierson',	'frajuju.fp@gmail.com',	'Pierson38',	'kd',	2,	'jj',	'2022-09-26'),
+(6,	'Martin',	'Matin',	'MM@g.com',	'mmmmmm69',	'de',	0,	'de',	'2022-09-26');
 
--- 2022-09-26 06:57:31
+-- 2022-09-28 09:44:01
