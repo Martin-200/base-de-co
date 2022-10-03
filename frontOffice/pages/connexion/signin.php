@@ -17,9 +17,9 @@ if (isset($_POST['login'])) {
     $password = sha1($_POST['password']);
     if (!empty($mail)) {
 
-    $req = $bdd->prepare('SELECT * FROM user WHERE mail = ?');
-    $req->execute(array($mail));
-    $ver = $req->fetch();
+        $req = $bdd->prepare('SELECT * FROM user WHERE mail = ?');
+        $req->execute(array($mail));
+        $ver = $req->fetch();
 
         if (@$mail == @$ver['mail'] && @$password == @$ver['password']) {
 
@@ -35,16 +35,16 @@ if (isset($_POST['login'])) {
                 setcookie("userID", $ver['userID'], time() + 3600 * 24 * 30);
                 setcookie("username", $ver['username'], time() + 3600 * 24 * 30);
                 setcookie("mail", $ver['mail'], time() + 3600 * 24 * 30);
-
             }
-                header('Location:index.php');
+            header('Location:index.php');
         } else {
-            @$msg = '<span class="alert alert-danger" style="margin-left:10%;text-decoration: none;border-radius:100px;font-size:16px;padding: 2px 6px 2px 6px;" >informations erronées</span>';
+            $msg = '<span class="alert alert-danger text-focus-in" style="margin-left:10%;text-decoration: none;border-radius:100px;font-size:16px;padding: 2px 6px 2px 6px;" >informations erronées</span>';
+            $m = 'border-color: red;';
         }
     } else {
-        @$msg = '<span class="alert alert-danger" style="margin-left:10%;text-decoration: none;border-radius:100px;font-size:16px;padding: 2px 6px 2px 6px;" >Veuillez remplir tout les champs</span>';
+        $msg = '<span class="alert alert-danger text-focus-in" style="margin-left:10%;text-decoration: none;border-radius:100px;font-size:16px;padding: 2px 6px 2px 6px;" >Veuillez remplir tout les champs</span>';
+        $m = 'border-color: red;';
     }
-    
 }
 
 ?>
@@ -63,110 +63,157 @@ if (isset($_POST['login'])) {
 
 <body>
 
-<style>
+    <script>
+        window.onbeforeunload = function() {
+            window.scrollTo(0, 0);
+            if (window.history.replaceState) {
+                window.history.replaceState(null, null, window.location.href);
+            }
+        }
+    </script>
 
-@media screen and (min-width: 991px) {
-  *{
-    overflow-x: hidden;
-    overflow-y: hidden;
-}
-}
+    <style>
+        .text-focus-in {
+            -webkit-animation: text-focus-in 0.4s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
+            animation: text-focus-in 0.4s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
+        }
 
-.float-container {
-    border: 3px none #fff;
-}
+        @-webkit-keyframes text-focus-in {
+            0% {
+                -webkit-filter: blur(12px);
+                filter: blur(12px);
+                opacity: 0;
+            }
 
-.float-child {
-    width: 50%;
-    float: left;
-}  
-.cont img{
-    width: 100%;
-    height: auto;
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-}
+            100% {
+                -webkit-filter: blur(0px);
+                filter: blur(0px);
+                opacity: 1;
+            }
+        }
 
-@media screen and (min-width: 1200px) {
-.lol {
-    padding-left: 8%;
-}
-}
+        @keyframes text-focus-in {
+            0% {
+                -webkit-filter: blur(12px);
+                filter: blur(12px);
+                opacity: 0;
+            }
 
-@media screen and (min-width: 1200px) {
-.lil {
-    margin-left:  5%;
-    padding-left: 3%;
-    }
-}
+            100% {
+                -webkit-filter: blur(0px);
+                filter: blur(0px);
+                opacity: 1;
+            }
+        }
 
-.zoom
-{
-    zoom: 108%;
-}
+        @media screen and (min-width: 991px) {
+            * {
+                overflow-x: hidden;
+                overflow-y: hidden;
+            }
+        }
 
-</style>
+        .float-container {
+            border: 3px none #fff;
+        }
 
-<script>
+        .float-child {
+            width: 50%;
+            float: left;
+        }
 
-window.onbeforeunload = function () {
-window.scrollTo(0, 0);
-}
+        .cont img {
+            width: 100%;
+            height: auto;
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
 
-</script>
+        @media screen and (min-width: 1200px) {
+            .lol {
+                padding-left: 8%;
+            }
+        }
 
-        <div class="card text-black">
-        <div class="">
-            <div class="row justify-content-center lil zoom">
-            <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1" style="padding: 30px;    margin-top: 30px;">
+        @media screen and (min-width: 1900px) {
+            .cont img {
+                width: 100%;
+                height: 90%;
+                background-size: cover;
+                background-repeat: no-repeat;
+                background-position: center;
+            }
+        }
+
+        @media screen and (min-width: 1200px) {
+            .lil {
+                margin-left: 5%;
+                padding-left: 3%;
+            }
+        }
+
+        .zoom {
+            zoom: 108%;
+        }
+    </style>
+
+    <script>
+        window.onbeforeunload = function() {
+            window.scrollTo(0, 0);
+        }
+    </script>
+
+    <div class="row justify-content-center lil zoom">
+        <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1" style="padding: 30px;    margin-top: 30px;">
 
             <div>
-                    <button type="button"  style="text-decoration: none;border-radius:100px;background:#DDFFF1;font-size:16px;padding: 2px 4px 2px 4px;color: #09442B;" disabled>Compte</button>
-                    <?php if (@$msg) {
+                <button type="button" style="text-decoration: none;border-radius:100px;background:#DDFFF1;font-size:16px;padding: 2px 4px 2px 4px;color: #09442B;border: none;
+    font-weight: 600;" disabled>Compte</button>
+                <?php if (@$msg) {
                     echo @$msg;
-                    }  ?>
-                </div>
+                }  ?>
+            </div>
 
-                <h1 class="text-left h1 fw-bold" style="margin-left:1px;font-weight: 700;font-size: 40px;line-height: 60px;color: #11053B;">Me connecter</h1>
-                <p class="text-left h6" style="font-family: 'Poppins';font-style: normal;font-weight: 500;font-size: 16px;line-height: 24px;color: #8881A3;">Accédez à des fonctionnalités supplémentaires</p>
+            <h1 class="text-left h1 fw-bold" style="margin-left:1px;font-weight: 700;font-size: 40px;line-height: 60px;color: #11053B;">Me connecter</h1>
+            <p class="text-left h6" style="font-family: 'Poppins';font-style: normal;font-weight: 500;font-size: 16px;line-height: 24px;color: #8881A3;">En créant votre compte, vous pourrez accéder à des fonctionnalités supplémentaires.</p>
 
-                <form class="mx-1 mx-md-4" method="post">
+            <form class="mx-1" method="post">
 
-            <div class="float-container">
-                <div class="flex-row align-items-center  " style="width:60% ;">
-                    <i class="fas fa-user fa-lg me-3 fa-fw"></i>
-                    <div class="form-outline flex-fill mb-0">
-                    <label class="form-label" for="form3Example1c" style="font-weight:600;color: #11053B;" >E-mail*</label>
-                    <input style="border-radius:100px;" type="mail"  class="form-control" name="mail" id="mail" placeholder="E-mail" required />
+                <div class="float-container">
+                    <div class="flex-row align-items-center  " style="width:60% ;">
+                        <i class="fas fa-user fa-lg me-3 fa-fw"></i>
+                        <div class="form-outline flex-fill mb-0">
+                            <label class="form-label" for="form3Example1c" style="font-weight:600;color: #11053B;">E-mail*</label>
+                            <input style="border-radius:100px;<?= $m ?>" type="mail" class="form-control" name="mail" id="mail" placeholder="E-mail" required />
+                        </div>
+                    </div>
+
+                    <div class="flex-row align-items-center mb-4 " style="width:60% ;">
+                        <i class="fas fa-user fa-lg me-3 fa-fw"></i>
+                        <div class="form-outline flex-fill mb-0">
+                            <label class="form-label" for="form3Example1c" style="font-weight:600;color: #11053B;">Mot de passe*</label>
+                            <input style="border-radius:100px;<?= $m ?>" type="password" class="form-control" name="password" id="pwd" placeholder="Mot de passe" required />
+                        </div>
                     </div>
                 </div>
-            
-                <div class="flex-row align-items-center mb-4 " style="width:60% ;">
-                    <i class="fas fa-user fa-lg me-3 fa-fw"></i>
-                    <div class="form-outline flex-fill mb-0">
-                    <label class="form-label" for="form3Example1c" style="font-weight:600;color: #11053B;" >Mot de passe*</label>
-                    <input style="border-radius:100px;" type="password"  class="form-control" name="password" id="pwd" placeholder="Mot de passe" required />
-                    </div>
-                </div>
-                </div>
-                <div style="margin-bottom:10px;" >
-                <a href="fpassword.php"> Mot de passe oublié !</a>
+                <div style="margin-bottom:10px;">
+                    <a href="fpassword.php"> Mot de passe oublié ?</a>
                 </div>
 
-                <div class="form-check  mb-5">
-                <input class="form-check-input " name="remind" type="checkbox" value="" id="form2Example3c" />
+                <div class="form-check mb-3">
+                    <input class="form-check-input" name="remind" type="checkbox" value="" id="form2Example3c" />
                     <label class="form-check-label" for="form2Example3">
-                    ‎ Se souvenir de moi</label>
-                </div> 
-
-                <div class=" mx-4 mb-3 mb-lg-4">
-                    <button  type="submit" name="login" style="text-decoration: none;border-radius:100px;background:#11053B;font-size:16px;padding: 10px 70px 10px 70px;color: #FDFDFD;">Me connecter</button>
+                        ‎ Se souvenir de moi</label>
                 </div>
-                Pas de compte ? <a href="signup.php">  Inscrivez-vous !</a>
 
-                </form>
-                <h6 style="padding-top:50px;
+                <div class="mb-3 mb-lg-4">
+                    <button type="submit" name="login" style="text-decoration: none;border-radius:100px;background:#11053B;font-size:16px;padding: 10px 70px 10px 70px;color: #FDFDFD;">Me connecter</button>
+                </div>
+                Pas de compte ? <a href="signup.php" style="text-decoration: none;"> Inscrivez-vous !</a>
+
+            </form>
+            <h6 style="padding-top:50px;
 left: 4.58%;
 right: 69.03%;
 top: 80.92%;
@@ -177,14 +224,12 @@ font-weight: 500;
 font-size: 14px;
 line-height: 21px;
 color: #AEACC8;">© 2022 404.io Tous droits réservés</h6>
-            </div>
+        </div>
+        <div class="col-md-10 col-lg-6 col-xl-7 d-flex order-1 order-lg-2 cont lol">
+            <img src="ressource/l.png" class="img-fluid" alt="Sample image">
+        </div>
+    </div>
 
-            <div class="col-md-10 col-lg-6 col-xl-7 d-flex order-1 order-lg-2 cont lol" >
-                <img src="ressource/l.png" class="img-fluid" alt="Sample image">
-            </div>
-            </div>
-        </div>
-        </div>
 </body>
 
 </html>

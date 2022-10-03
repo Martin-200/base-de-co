@@ -1,37 +1,19 @@
 <?php
 include("db.php");
 
-@$Email = htmlspecialchars($_POST['mail']);
+@$Email = base64_decode($_GET['qNx!']);
 
-//On recupere les addresse email de la bdd  et on les stock dans la variable $mail
 $req = $bdd->prepare('SELECT mail FROM user WHERE mail = ?');
 $req->execute(array($Email));
-
 $mail = $req->fetch();
 
-if (isset($_POST['login'])) {
-    if ($Email = $mail) {
+if (isset($_POST['del'])) {
 
-        $email = htmlspecialchars($_POST['mail']);
-        $subject = "[404.Just found it] Reinitialisez votre mot de passe";
-        $message = '
-Cliquez sur ce lien pour reinitialiser votre mot de passe : 
-http://localhost/basedeco/rpassword.php?qNx!=' . base64_encode($_POST['mail']) . ' 
-        
-        404.Just found it  © ' . @$annee . 'Copyright';
-        $headers = 'Content-type: text/html; charset=UTF-8' . "\r\n";
-        @mail($email, $subject, $message, $headers);
+    $req2 = $bdd->query('DELETE FROM user WHERE mail = "' . base64_decode($_GET['qNx!']) . '"  ');
+    @$msg = '<span class="alert alert-success text-focus-in" style="margin-left:10%;text-decoration: none;border-radius:100px;font-size:16px;padding: 2px 6px 2px 6px;">Compte supprimer avec succès !</span>';
+    header("refresh: 3; url=http://localhost/basedeco/signin.php");
 
-        @$msg = '<span class="alert alert-success text-focus-in" style="margin-left:10%;text-decoration: none;border-radius:100px;font-size:16px;padding: 2px 6px 2px 6px;">Lien de reinitialisation envoyé !</span>';
-        $md = 'border-color: green;';
-        header("refresh: 3; url=http://localhost/basedeco/signin.php");
-    } else {
-        @$msg = '<span class="alert alert-danger text-focus-in" style="margin-left:10%;text-decoration: none;border-radius:100px;font-size:16px;padding: 2px 6px 2px 6px;">Email inconnu ! </span>';
-        $m = 'border-color: red;';
-    }
 }
-
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -42,7 +24,7 @@ http://localhost/basedeco/rpassword.php?qNx!=' . base64_encode($_POST['mail']) .
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="bootstrap-5.1.3-dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="style.css">
-    <title>Reinitialiser mot de passe</title>
+    <title>Modifier votre mot de passe</title>
 </head>
 
 <script>
@@ -141,6 +123,7 @@ http://localhost/basedeco/rpassword.php?qNx!=' . base64_encode($_POST['mail']) .
 </style>
 
 <body>
+
     <div class="wrapper">
 
         <div class="row justify-content-center lil zoom">
@@ -148,33 +131,22 @@ http://localhost/basedeco/rpassword.php?qNx!=' . base64_encode($_POST['mail']) .
 
                 <div>
                     <button type="button" style="text-decoration: none;border-radius:100px;background:#DDFFF1;font-size:16px;padding: 2px 4px 2px 4px;color: #09442B;border: none;
-    font-weight: 600;" disabled>Compte</button>
+font-weight: 600;" disabled>Compte</button>
                     <?php if (@$msg) {
                         echo @$msg;
                     }  ?>
                 </div>
 
-                <h1 class="text-left h1 fw-bold" style="margin-left:1px;font-weight: 700;font-size: 40px;line-height: 60px;color: #11053B;">Vous ne pouvez pas vous connecter ?
-                    <br> Mot de passe oublié
+                <h1 class="text-left h1 fw-bold" style="margin-left:1px;font-weight: 700;font-size: 40px;line-height: 60px;color: #11053B;">Voulez vous vraiment supprimer votre compte ?
                 </h1>
-                <p class="text-left h6" style="font-family: 'Poppins';font-style: normal;font-weight: 500;font-size: 16px;line-height: 24px;color: #8881A3;">Saisissez le mail lié à votre compte 404.io. Un lien de réinitialisation vous sera envoyé</p>
+                <p class="text-left h6" style="font-family: 'Poppins';font-style: normal;font-weight: 500;font-size: 16px;line-height: 24px;color: #8881A3;">Attention cette action est irreversible !</p>
 
                 <form class="mx-1" method="post">
 
-                    <div class="float-container" style="padding-bottom: 7%;">
-                        <div class="flex-row align-items-center  " style="width:60% ;">
-                            <i class="fas fa-user fa-lg me-3 fa-fw"></i>
-                            <div class="form-outline flex-fill mb-0">
-                                <label class="form-label" style="font-weight:600;color: #11053B;">E-mail*</label>
-                                <input style="border-radius:100px;<?= $m ?> ; <?= $md ?>" type="mail" class="form-control" name="mail" id="mail" placeholder="exemple@email.com" required />
-                            </div>
-                        </div>
 
-
-                    </div>
 
                     <div class="mb-3 mb-lg-4">
-                        <button type="submit" name="login" style="text-decoration: none;border-radius:100px;background:#11053B;font-size:16px;padding: 10px 70px 10px 70px;color: #FDFDFD;">Envoyer le lien de recuperation</button>
+                        <button type="submit" name="del" style="text-decoration: none;border-radius:100px;border:none;background:#940E0E;font-size:16px;padding: 10px 70px 10px 70px;color: #FDFDFD;">Supprimer mon compte</button>
                     </div>
                     <a href="signin.php" style="text-decoration: none"> Retour à la connexion</a>
                     <br>
