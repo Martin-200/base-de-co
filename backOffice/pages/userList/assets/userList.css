@@ -1,0 +1,57 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins';
+}
+
+
+
+h1 {
+    color: darkblue;
+    font-weight: 700;
+}
+
+tbody tr:nth-of-type(odd) {
+    background-color: #F8F6FF;
+}
+
+tbody tr {
+    border-bottom: 1px solid #AEACC8;
+}
+
+
+th {
+    font-weight: 700;
+}
+
+td {
+    font-weight: 400;
+}
+
+.btn-edit {
+    background-color: #11053B;
+    border: none;
+    color: white;
+    border-radius: 25px;
+    padding: 0.5em 1em;
+}
+
+.btn-delete {
+    background-color: #940E0E;
+    border: none;
+    color: white;
+    border-radius: 25px;
+    padding: 0.5em 1em;
+}
+
+.btn-ban {
+    background-color: #EB9E09;
+    border: none;
+    color: white;
+    border-radius: 25px;
+    padding: 0.5em 1em;
+}

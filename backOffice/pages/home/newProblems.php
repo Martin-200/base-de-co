@@ -1,5 +1,5 @@
 <?php
-require('../../../lib/config.php');
+require_once __DIR__ . "/../../../lib/config.php";
 
 
 
@@ -10,19 +10,58 @@ foreach ($data as $row) {
     $newProblems[$row['problemID']] = $row;
 }
 ?>
-<h2>Liste des nouveaux problèmes</h2>
 
-<?php
-foreach ($newProblems as $row) {
-    echo '<div class="d-bloc list-NP" data-newProblemID=' . $row['problemID'] . '>';
-    echo "<p class='title'>" . $row['title'] . "</p>";
-    echo "<p class='codeError'>" . $row['codeError'] . "</p>";
-    echo "<p class='dateOfPublication'>" . $row['dateOfPublication'] . "</p>";
-    echo "<p class='username'>" . $row['username'] . "</p>";
-    echo "<div><button type='button' class='btn btn-primary edit-modal' data-newProblemID='" . $row['problemID'] . "' data-bs-toggle='modal' data-bs-target='#moreInfoNewProblems'>Voir</button><button type='button' class='btn btn-outline-danger npPublieNP' data-newProblemID='" . $row['problemID'] . "'>Ne pas publié</button><button type='button' class='btn btn-outline-success publieNP' data-newProblemID='" . $row['problemID'] . "'>Publié</button></div>";
-    echo "</div>";
-}
-?>
+
+<div class="row">
+    <div class="col">
+        <div class="mini-title">
+            <p>Demandes</p>
+        </div>
+        <H2>Liste Demande de fiche</H2>
+        <p class='counterPost' data-count='<?= count($newProblems) ?>'><?= count($newProblems) ?> demandes</p>
+    </div>
+</div>
+<div class="row itemList overflow-scroll">
+    <div class="col">
+        <?php
+        if (count($newProblems) == 0) {
+            echo 'Pas de demandes à gérer';
+        } else {
+            foreach ($newProblems as $row) {
+                echo '<div class="d-bloc list-NP mb-4" data-newProblemID=' . $row['problemID'] . '>';
+                echo '<div class="row">';
+                echo '<div class="col">';
+                echo '<div>';
+                echo "<p class='label'>Titre</p>";
+                echo "<p class='title'>" . $row['title'] . "</p>";
+                echo '</div>';
+                echo '<div>';
+                echo "<p class='label'>Proposé par</p>";
+                echo "<p class='username'>" . $row['username'] . "</p>";
+                echo '</div>';
+                echo '</div>';
+                echo '<div class="col">';
+                echo '<div>';
+                echo "<p class='label'>Code Erreur</p>";
+                echo "<p class='codeError'>" . $row['codeError'] . "</p>";
+                echo '</div>';
+                echo '<div>';
+                echo "<p class='label'>Date</p>";
+                echo "<p class='dateOfPublication'>" . date_format(date_create($row['dateOfPublication']), "d/m/Y H:i:s") . "</p>";
+                echo '</div>';
+                echo '</div>';
+                echo '</div>';
+                echo '<div class="row">';
+                echo '<div class="col d-flex flex-row justify-content-center">';
+                echo "<div><button type='button' class='btn-delete npPublieNP' data-newProblemID='" . $row['problemID'] . "'><img src='./assets/delete.png' alt='Delete'></button><button type='button' class='btn-edit edit-modal mx-4' data-newProblemID='" . $row['problemID'] . "' data-bs-toggle='modal' data-bs-target='#moreInfoNewProblems'>Voir</button><button type='button' class='btn-valider publieNP' data-newProblemID='" . $row['problemID'] . "'><img src='./assets/valid-icon.png' alt='Valider'></button></div>";
+                echo "</div>";
+                echo "</div>";
+                echo "</div>";
+            }
+        }
+        ?>
+    </div>
+</div>
 
 
 
@@ -55,9 +94,9 @@ foreach ($newProblems as $row) {
 </div>
 
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
+<!--<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>-->
 
 <script>
     jQuery(document).ready(function($) {
@@ -91,7 +130,7 @@ foreach ($newProblems as $row) {
 
             $.ajax({
                 type: "POST",
-                url: "./newProblemUtils/publishProblem.php",
+                url: "./pages/home/newProblemUtils/publishProblem.php",
                 data: dataString,
                 success: function(data) {
                     console.log(data);
@@ -107,34 +146,41 @@ foreach ($newProblems as $row) {
 
             $('#moreInfoNewProblems').modal('hide');
 
+            var nbrePost = $('.counterPost').attr('data-count');
+            $('.counterPost').replaceWith(nbrePost - 1 + ' demandes')
+            $('.counterPost').attr('data-count', nbrePost - 1);
+
 
 
         });
 
         //Bouton Ne pas publié
         $('.npPublieNP').on('click', function(e) {
-                e.preventDefault();
-                $thisbutton = $(this);
-                var problemID = $thisbutton.attr('data-newProblemID');
-                var dataString = "problemID=" + problemID;
+            e.preventDefault();
+            $thisbutton = $(this);
+            var problemID = $thisbutton.attr('data-newProblemID');
+            var dataString = "problemID=" + problemID;
 
-                $.ajax({
-                    type: "POST",
-                    url: "./newProblemUtils/deleteProblem.php",
-                    data: dataString,
-                    success: function(data) {
-                        console.log(data);
-                    }
-                });
+            $.ajax({
+                type: "POST",
+                url: "./pages/home//newProblemUtils/deleteProblem.php",
+                data: dataString,
+                success: function(data) {
+                    console.log(data);
+                }
+            });
 
-                delete newProblemList[problemID];
+            delete newProblemList[problemID];
 
-                $("div[data-newProblemID=" + problemID + "]").remove();
+            $("div[data-newProblemID=" + problemID + "]").remove();
 
 
+            var nbrePost = $('.counterPost').attr('data-count');
+            $('.counterPost').replaceWith(nbrePost - 1 + ' demandes')
+            $('.counterPost').attr('data-count', nbrePost - 1);
 
-                $('#moreInfoNewProblems').modal('hide');
-            })
+            $('#moreInfoNewProblems').modal('hide');
+        })
 
     });
 </script>

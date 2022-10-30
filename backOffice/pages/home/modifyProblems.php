@@ -1,5 +1,5 @@
 <?php
-require('../../../lib/config.php');
+require_once __DIR__ . "/../../../lib/config.php";
 
 
 
@@ -11,20 +11,58 @@ foreach ($data as $row) {
 }
 
 ?>
-<h2>Liste des problèmes qui ont été modifiés</h2>
+<div class="row">
+    <div class="col">
+        <div class="mini-title">
+            <p>Modifs en cours</p>
+        </div>
+        <H2>Liste Modifications en cours </H2>
+        <p class='counterPost-modify' data-count='<?= count($modifyProblems) ?>'><?= count($modifyProblems) ?> modifications en cours de validation</p>
+    </div>
+</div>
 
-<?php
-foreach ($modifyProblems as $row) {
-    echo '<div class="d-bloc list-MP" data-modifyProblemID=' . $row['problemID'] . '>';
-    echo "<p class='title'>" . $row['newTitle'] . "</p>";
-    echo "<p class='codeError'>" . $row['newCodeError'] . "</p>";
-    echo "<p class='dateOfPublication'>" . $row['dateOfModification'] . "</p>";
-    echo "<div><button type='button' class='btn btn-primary edit-modalModify' data-modifyProblemID='" . $row['problemID'] . "' data-bs-toggle='modal' data-bs-target='#moreInfomodifyProblems'>Voir</button><button type='button' class='btn btn-outline-danger npPublieMP' data-modifyProblemID='" . $row['problemID'] . "'>Ne pas publié</button><button type='button' class='btn btn-outline-success publieMP' data-modifyProblemID='" . $row['problemID'] . "'>Publié</button></div>";
-    echo "</div>";
-}
-?>
+<div class="row itemList overflow-scroll">
+    <div class="col">
+        <?php
+        if (count($modifyProblems) == 0) {
+            echo 'Pas de demandes à gérer';
+        } else {
+            foreach ($modifyProblems as $row) {
+                echo '<div class="d-bloc list-MP mb-5" data-modifyProblemID=' . $row['problemID'] . '>';
+                echo '<div class="row">';
+                echo '<div class="col">';
+                echo '<div>';
+                echo "<p class='label'>Nouveau Titre</p>";
+                echo "<p class='title'>" . $row['newTitle'] . "</p>";
+                echo '</div>';
+                echo '<div>';
+                echo "<p class='label'>Code Error</p>";
+                echo "<p class='codeError'>" . $row['newCodeError'] . "</p>";
+                echo '</div>';
+                echo '</div>';
+                echo '<div class="col">';
+                echo '<div>';
+                echo "<p class='label'>Ancien Titre</p>";
+                echo "<p class='title'>" . $row['title'] . "</p>";
+                echo '</div>';
+                echo '<div>';
+                echo "<p class='label'>Date de modification</p>";
+                echo "<p class='dateOfPublication'>" . date_format(date_create($row['dateOfModification']), "d/m/Y H:i:s") . "</p>";
+                echo '</div>';
+                echo '</div>';
+                echo '</div>';
+                echo '<div class="row">';
+                echo '<div class="col d-flex flex-row justify-content-center">';
+                echo "<div><button type='button' class='btn-delete npPublieMP' data-modifyProblemID='" . $row['problemID'] . "'><img src='./assets/delete.png' alt='Delete'></button><button type='button' class='btn-edit edit-modalModify mx-4' data-modifyProblemID='" . $row['problemID'] . "' data-bs-toggle='modal' data-bs-target='#moreInfomodifyProblems'>Voir</button><button type='button' class='btn-valider publieMP' data-modifyProblemID='" . $row['problemID'] . "'><img src='./assets/valid-icon.png' alt='Valider'></button></div>";
+                echo "</div>";
+                echo "</div>";
+                echo "</div>";
+            }
+        }
+        ?>
 
-
+    </div>
+</div>
 
 <!-- Modal Informations -->
 <div class="modal fade" id="moreInfoModifyProblems" tabindex="-1" aria-labelledby="moreInfoModifyProblemsLabel" aria-hidden="true">
@@ -66,9 +104,9 @@ foreach ($modifyProblems as $row) {
 </div>
 
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
+<!--<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>-->
 
 <script>
     jQuery(document).ready(function($) {
@@ -117,7 +155,7 @@ foreach ($modifyProblems as $row) {
 
             $.ajax({
                 type: "POST",
-                url: "./modifyProblemUtils/publishProblemModify.php",
+                url: "./pages/home/modifyProblemUtils/publishProblemModify.php",
                 data: dataString,
                 success: function(data) {
                     console.log(data);
@@ -133,6 +171,10 @@ foreach ($modifyProblems as $row) {
 
             $('#moreInfoModifyProblems').modal('hide');
 
+            var nbrePost = $('.counterPost-modify').attr('data-count');
+            $('.counterPost-modify').replaceWith(nbrePost - 1 + ' modifications en cours de validation')
+            $('.counterPost-modify').attr('data-count', nbrePost - 1);
+
 
 
         });
@@ -147,7 +189,7 @@ foreach ($modifyProblems as $row) {
 
             $.ajax({
                 type: "POST",
-                url: "./modifyProblemUtils/cancelModification.php",
+                url: "./pages/home/modifyProblemUtils/cancelModification.php",
                 data: dataString,
                 success: function(data) {
                     console.log(data);
@@ -161,6 +203,10 @@ foreach ($modifyProblems as $row) {
 
 
             $('#moreInfoModifyProblems').modal('hide');
+
+            var nbrePost = $('.counterPost-modify').attr('data-count');
+            $('.counterPost-modify').replaceWith(nbrePost - 1 + ' modifications en cours de validation')
+            $('.counterPost-modify').attr('data-count', nbrePost - 1);
         })
 
     });

@@ -1,0 +1,102 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins";
+}
+
+.mini-title {
+  background-color: #ddfff1;
+  width: fit-content;
+
+  padding: 6px 24px;
+  border-radius: 25px;
+}
+
+.mini-title p {
+  margin: 0;
+  color: #09442b;
+  font-weight: 500;
+}
+
+h1 {
+  color: darkblue;
+  font-weight: 700;
+  margin-top: 0.3em;
+}
+thead {
+  background-color: #eeeaff;
+}
+
+tbody tr:nth-of-type(even) {
+  background-color: #f8f6ff;
+}
+
+tbody tr {
+  border-bottom: 1px solid #aeacc8;
+}
+
+th {
+  font-weight: 700;
+  padding: 1em !important;
+  vertical-align: middle;
+  text-align: center;
+}
+
+td {
+  font-weight: 400;
+  padding: 2em !important;
+  vertical-align: middle;
+  text-align: center;
+}
+
+.btn-deban {
+  background-color: #11053b;
+  border: none;
+  color: white;
+  border-radius: 25px;
+  padding: 0.5em 2em;
+}
+
+
+
+.modal-header {
+  border-bottom: none !important;
+}
+.modal-header h5 {
+  color: #11053b;
+  font-weight: bold;
+}
+
+.modal-header .btn-close {
+  background-color: #d3d5ff;
+  border-radius: 50%;
+}
+
+.modal-body {
+  font-weight: 500;
+}
+
+.btn-valider {
+  background-color: #11053b;
+  border: none;
+  color: white;
+  border-radius: 25px;
+  padding: 0.5em 2em;
+  border: 3px solid #11053b;
+}
+
+.btn-fermer {
+  border: 3px solid #11053b;
+  color: #11053b;
+  border-radius: 25px;
+  padding: 0.5em 2em;
+  background-color: white;
+}
+
+.modal-footer {
+
+    justify-content: space-between !important;
+}

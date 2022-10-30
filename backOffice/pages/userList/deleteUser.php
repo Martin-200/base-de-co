@@ -1,6 +1,6 @@
 <?php
 
-require('../../../lib/config.php');
+require_once __DIR__ . "/../../../lib/config.php";
 
 $userId = $_POST["userID"];
 

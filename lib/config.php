@@ -1,12 +1,12 @@
 <?php
-    define('BDD_HOST', 'localhost');  
+    define('BDD_HOST', '127.0.0.1');  
     define('BDD_NAME', 'basedeco');
-    define('BDD_USER', 'admin');
-    define('BDD_PASS', '1234');
+    define('BDD_USER', 'root');
+    define('BDD_PASS', 'root');
 
     try
     {
-        $bdd = new PDO('mysql:host='.BDD_HOST.';dbname='.BDD_NAME.';charset=utf8', BDD_USER, BDD_PASS, array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
+        $bdd = new PDO('mysql:host='.BDD_HOST.';dbname='.BDD_NAME.';charset=utf8;port=8889', BDD_USER, BDD_PASS, array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
     }
     catch (Exception $e)
     {

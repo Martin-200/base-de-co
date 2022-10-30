@@ -1,0 +1,152 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins";
+}
+
+.mini-title {
+  background-color: #ddfff1;
+  width: fit-content;
+
+  padding: 6px 24px;
+  border-radius: 25px;
+}
+
+.mini-title p {
+  margin: 0;
+  color: #09442b;
+  font-weight: 500;
+}
+
+h1 {
+  color: darkblue;
+  font-weight: 700;
+  margin-top: 0.3em;
+}
+
+thead {
+  background-color: #eeeaff;
+}
+
+tbody tr:nth-of-type(even) {
+  background-color: #f8f6ff;
+}
+
+tbody tr {
+  border-bottom: 1px solid #aeacc8;
+}
+
+th {
+  font-weight: 700;
+  padding: 1em !important;
+  vertical-align: middle;
+  text-align: center;
+}
+
+td {
+  font-weight: 400;
+  padding: 2em !important;
+  vertical-align: middle;
+  text-align: center;
+}
+
+.btn-edit {
+  background-color: #11053b;
+  border: none;
+  color: white;
+  border-radius: 25px;
+  padding: 0.5em 2em;
+}
+
+.btn-ban {
+  background-color: #eb9e09;
+  border: none;
+  color: white;
+  border-radius: 25px;
+  padding: 0.5em 2em;
+}
+
+.btn-supprimer {
+  background-color: #940e0e;
+  border: none;
+  color: white;
+  border-radius: 25px;
+  padding: 0.5em 2em;
+}
+
+.btn-delete {
+  background-color: #ffd8d8;
+  border: none;
+  color: white;
+  border-radius: 50%;
+  padding: 0.5em;
+  width: 40px;
+  aspect-ratio: 1/1;
+}
+
+.btn-ban {
+  background-color: #eb9e09;
+  border: none;
+  color: white;
+  border-radius: 25px;
+  padding: 0.5em;
+}
+
+.modal-header {
+  border-bottom: none !important;
+}
+.modal-header h5 {
+  color: #11053b;
+  font-weight: bold;
+}
+
+.modal-header .btn-close {
+  background-color: #d3d5ff;
+  border-radius: 50%;
+}
+
+.modal-body {
+  font-weight: 500;
+}
+.edit-user {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1em;
+}
+
+.modal-body label {
+  color: #11053b;
+  font-weight: 600;
+}
+
+.modal-body input,
+.modal-body select {
+  display: block;
+  border-radius: 25px;
+  border: 2px solid #aeacc8;
+  padding: 0.3em 0.7em;
+}
+
+.btn-valider {
+  background-color: #11053b;
+  border: none;
+  color: white;
+  border-radius: 25px;
+  padding: 0.5em 2em;
+  border: 3px solid #11053b;
+}
+
+.btn-fermer {
+  border: 3px solid #11053b;
+  color: #11053b;
+  border-radius: 25px;
+  padding: 0.5em 2em;
+  background-color: white;
+}
+
+.modal-footer {
+  justify-content: space-between !important;
+}

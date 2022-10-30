@@ -1,6 +1,6 @@
 <?php
 
-require('../../../lib/config.php');
+require_once __DIR__ . "/../../../lib/config.php";
 
 //$adminID = $_SESSION['userID'];
 $adminID = "1";
