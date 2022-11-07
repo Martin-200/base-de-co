@@ -43,6 +43,24 @@
         width: 100%;
         border: 1px solid #D3D5FF;
     }
+  .icone_comDIV
+    {
+        width: 35;
+    }
+
+    .Capture_P
+    {
+        width: 60%;
+    }
+
+    .Cap_Comm
+    {
+        width: 60%;
+    }
+    .Cap_fiche
+    {
+        width: 60%;
+    }
 </style>
 
 <body>
@@ -70,39 +88,156 @@
     </section>
 
     <section class="presentation">
-        <div class="presentation_row">
-            <div class="col d-flex align-items-center">
-                <div class="presentation_div1">
-                    <div class="mini-title">
-                        <p>Présentation</p>
+            <div class="row">
+                <div class="presentation_div1 col d-flex align-items-center justify-content-center">
+                    <div>
+                        <div class="mini-title">
+                            <p>Présentation</p>
+                        </div>
+                        <H1 class="title">Une base de <br> connaissances <br> communautaire </H1>
+                        <h2>Réalisé pour vous et par vous</h2>
+                        <button><a href="hero-header">Rechercher mon erreur</a></button>
                     </div>
-                    <H1 class="title">Une base de <br> connaissances <br> communautaire </H1>
-                    <h2>Réalisé pour vous et par vous</h2>
-                    <button></button>
                 </div>
-
-                <div class="presentation_div2">
-
+                    
+                <div class="presentation_div2 col d-flex align-items-center justify-content-center">
+                    <img class="Capture_P" src="../ressource/capureFiche.png" alt="Capture fiche ereur avec comentaire">
                 </div>
-            </div>
         </div>
 
     </section>
 
-    <div class="communaute">
-    </div>
+    <section class="communaute">
+            <div class="row">
+                <div class="commu_div1 col d-flex align-items-center justify-content-center">
+                    <img class="Cap_Comm" src="../ressource/capureMesage.png"  alt="capture commentaire">
+                </div>
+                <div class="commu_div2 col d-flex align-items-center justify-content-center">
+                    <div>
+                        <div class="mini-title">
+                            <p>Communauté</p>
+                        </div>
+                        <H1 class="title">Espace <br>  commentaire </H1>
+                        <h4>404.io vous aide  à resoudre l’ensemble de vos <br> problèmes. Possédant une grande base de <br> connaissances notamment alimentée par vous,<br> nous vous proposons un maximum de solutions. </h4>
+                        <div class="row">
+                            <div class="icone_comDIV col">
+                                <img class="icone_com" src="../ressource/Frame.png" alt="icone_com">
+                            </div>
+                            <div class="text_comDIV col">
+                                <p>Nous mettons  à votre disposition un espace commentaire  - <br> présent  sous chaque fiche réponse. Cet espace  vous permettra <br> d’échanger avec la communauté.</p>
+                            </div>
+                        </div>
+                    </div>
+                 </div>
+            </div>
+    </section>
 
-    <div class=fiche>
+    <section class=fiche>
+            <div class="row">
+                <div class="fiche_div1 col d-flex align-items-center justify-content-center">
+                    <div>
+                        <div class="mini-title">
+                            <p>Fiche</p>
+                        </div>
+                        <H1 class="title">Proposer votre <br>  fiche réponse </H1>
+                        <h4>Notre base vous aide à trouver les solutions à vos <br> problèmes, de plus elle tend à s’agrandir. Ainsi, via la <br> proposition de fiches, vous nous aiderez à faire <br> évoluer le site. </h4>
+                        <div class="row">
+                            <div class="icone_comDIV col">
+                                <img class="icone_Fic" src="../ressource/Icon_Ed.png" alt="icone_Fiche">
+                            </div>
+                            <div class="text_comDIV col" >
+                                <p>En plus de la proposition de fiche, 404.io vous permet de <br> modifier des solutions existantes - si vous les trouvez <br> incomplètes ou erronées.</p>
+                            </div>
+                        </div>
+                    </div>              
+                </div>
+                    <div class="fiche_div2 col d-flex align-items-center justify-content-center">
+                        <img class="Cap_fiche" src="../ressource/capureFormul.png"  alt="capture fiche">
+                    </div>
+                </div>
+            </div>
+    </section>
 
-    </div>
+    <section class="tecno">
+        <div class="Tecno_contenu">
+            <div class="mini-title">
+                <p>Technologies</p>
+            </div>
+            <H1 class="title_center">Exemples de technologies traitées</H1>
+            <img src="../ressource/icon_dev.png">
+        </div>
+    </section>
 
-    <div class="tecno">
+    <section class="aventage">
+        <div class="aventage_contenu">
+        <div class="mini-title">
+                <p>Avantage</p>
+            </div>
+            <H1 class="title_center">Avantages</H1>
+            <div class="col d-flex align-items-center">
+                <div class="aventage_div1">
+                    </div class="row">
+                        <div class="icone_aven">
+                            <img alt="icone_lign1_col1">
+                        </div>
+                        <div class="text_aven">
+                            <h4>Un recueil de fiches en expansion</h4>
+                            <p>Notre recueil de fiches solutions est en constante expension <br> et ne connait aucune limite</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="icone_aven">
+                            <img alt="icone_lign2_col1">
+                        </div>
+                        <div class="text_aven">
+                            <h4>Une communauté soudée et passionnée</h4>
+                            <p>Nous sommes une communauté soudée et à 100% <br> passionnée par l’informatique</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="icone_aven">
+                            <img alt="icone_lign3_col1">
+                        </div>
+                        <div class="text_aven">
+                            <h4>Un accès cross-plateforme</h4>
+                            <p>Accèdez à la base de connaissances où que vous soyez, peu <br> importe l’appareil</p>
+                        </div>
+                    </div>
+                </div>
 
-    </div>
+                <div class="aventage_div2">
+                    <div class="row">
+                        <div class="icone_aven">
+                            <img alt="icone_lign1_col2">
+                        </div>
+                        <div class="text_aven">
+                            <h4>Vérification par une équipe passionnée</h4>
+                            <p>Notre équipe vérifiera chaque fiche afin vous proposer des <br> solutions pertinentes qui vous feront gagner du temps</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="icone_aven">
+                            <img alt="icone_lign2_col2">
+                        </div>
+                        <div class="text_aven">
+                            <h4>Startup unique en son genre</h4>
+                            <p>Découvrez une startup unique en son genre avec un projet <br> novateur tendant à réunir les passionnés d’informatique</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="icone_aven">
+                            <img alt="icone_lign3_col2">
+                        </div>
+                        <div class="text_aven">
+                            <h4>Des développeurs rigoureux</h4>
+                            <p>Notre équipe travaille dur pour corriger chaque bug et vous <br> proposer la meilleure expérience possible</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <div>
 
-    <div class="aventage">
-
-    </div>
+    </section>
 
 </body>
 
