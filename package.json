@@ -1,0 +1,22 @@
+{
+  "name": "base-de-co",
+  "version": "1.0.0",
+  "description": "Projet scolaire base de connaissance",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "sass": "sass --watch ./frontOffice/pages/detailed_sheet/src/scss/main.scss:./frontOffice/pages/detailed_sheet/src/css/main.css --style compressed"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Martin-200/base-de-co.git"
+  },
+  "author": "mp",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Martin-200/base-de-co/issues"
+  },
+  "homepage": "https://github.com/Martin-200/base-de-co#readme"
+}
