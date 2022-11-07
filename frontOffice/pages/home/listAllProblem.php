@@ -105,6 +105,9 @@ $data = $bdd->query($query)->fetchAll();
             </div>
         </div>
     </div>
+
+    
+
 </body>
 
 </html>

@@ -46,7 +46,7 @@
 </style>
 
 <body>
-    <div class="hero-header">
+    <section class="hero-header">
 
         <div class="container">
             <div class="row">
@@ -67,6 +67,41 @@
                 </div>
             </div>
         </div>
+    </section>
+
+    <section class="presentation">
+        <div class="presentation_row">
+            <div class="col d-flex align-items-center">
+                <div class="presentation_div1">
+                    <div class="mini-title">
+                        <p>Présentation</p>
+                    </div>
+                    <H1 class="title">Une base de <br> connaissances <br> communautaire </H1>
+                    <h2>Réalisé pour vous et par vous</h2>
+                    <button></button>
+                </div>
+
+                <div class="presentation_div2">
+
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    <div class="communaute">
+    </div>
+
+    <div class=fiche>
+
+    </div>
+
+    <div class="tecno">
+
+    </div>
+
+    <div class="aventage">
+
     </div>
 
 </body>

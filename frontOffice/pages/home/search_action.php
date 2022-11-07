@@ -18,5 +18,12 @@ session_start();
 $_SESSION['problems'] = $problems;
 
 header("Location: listAllProblem.php?input=$input");
+?>
+
+<?php
+?>
+
+
+  
 
 
