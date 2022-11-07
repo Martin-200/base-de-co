@@ -31,7 +31,7 @@
     }
 
     .radiant-title {
-        background: -webkit-linear-gradient(326deg, rgba(215, 248, 240, 1), rgba(0, 102, 255, 1));
+        background: -webkit-linear-gradient(326deg, #11053B, #0066FF);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
 
