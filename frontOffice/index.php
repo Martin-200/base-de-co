@@ -44,6 +44,8 @@
         border-radius: 25px;
         width: 100%;
         border: 1px solid #D3D5FF;
+        background-color: #fff;
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.03);
     }
     .float-container {
     border: 3px none #fff;  
@@ -53,6 +55,7 @@
     .icon_livre
     {
         margin-right: 6px;
+        height: 15;
     }
     
     .float-child {
@@ -71,6 +74,7 @@
         color:#fff;
         text-align: center;
         padding: 6px 24px;
+        margin-top: 12px;
         
     }
 
@@ -87,6 +91,7 @@
     .icone_com
     {
         height:55px;
+        margin-right: 15px;
     }
 
     .Cap_Comm
@@ -100,18 +105,19 @@
 
     .communaute
     {
-        padding-top: 125px;
+        padding-top: 225px;
     }
 
     .fiche
     {
-        padding-top: 125px;
+        padding-top: 225px;
     }
 
     .searchProblem
     {
         border: none;
         width: 295px;
+        outline: 0;
     }
 
     .tecno
@@ -152,8 +158,75 @@
         text-decoration: none;
         color:#fff;
     }
+    .icone_loupe
+    {
+        padding-right: 9px;
+    }
+    h6
+    {
+        margin-top: 18px;
+    }
+    .icone_aven
+    {
+        margin-right: 15px;
+    }
+    .aventage_div1
+    {
+        margin-right: 85px;
+        min-width: 400px;
+    }
+   .aventage_div2
+   {
+        min-width: 400px;
+   }
 
-   
+   .presentation_div1
+   {
+    min-width: 400px;
+   }
+   .presentation_div2
+   {
+    min-width: 400px;
+   }
+
+   .commu_div1
+   {
+    min-width: 400px;
+   }
+   .commu_div2
+   {
+    min-width: 400px;
+   }
+
+   .fiche_div1
+   {
+    min-width: 400px;
+   }
+   .fiche_div2
+   {
+    min-width: 400px;
+   }
+
+   @media (min-width: 0px) and (max-width: 600px) 
+   { 
+        .aventage_div1
+        {
+            margin-right: 0;
+            min-width: none;
+        }
+        .container
+        {
+            margin: 10px;
+        }
+        .presentation_div2
+        {
+            margin-top: 42px;
+        }
+        .commu_div2
+        {
+            margin-top: 42px;
+        }
+    }
    
 </style>
 
@@ -164,12 +237,12 @@
             <div class="row">
                 <div class="col d-flex align-items-center">
                     <div>
-                        <div class="mini-title d-flex">
+                        <div class="mini-title d-flex align-items-center">
                             <img class="icon_livre" src="../ressource/Vector.png">
                             <p>Base de connaissance</p>
                         </div>
                         <H1 class="radiant-title">Jamais 4 Erreurs <br> Sans 4 Solutions</H1>
-                        <h6>Trouve la solution a ton erreur</h6>
+                        <h6 class="fw-bold">Trouve la solution à ton erreur</h6>
                         <form class="d-flex" action="./pages/home/search_action.php" method="POST">
                             <div id="searchProblem">
                                 <img class="icone_loupe" src="../ressource/search-icon.png">
@@ -187,7 +260,7 @@
 
     <section class="presentation">
             <div class="row">
-                <div class="presentation_div1 col d-flex align-items-center justify-content-center">
+                <div class="presentation_div1 col d-flex align-items-center justify-content-center flex-wrap">
                     <div class="pre col d-flex align-items-center justify-content-center">
                         <div>
                             <div class="mini-title">
@@ -207,7 +280,7 @@
     </section>
 
     <section class="communaute">
-            <div class="row">
+            <div class="row flex-wrap">
                 <div class="commu_div1 col d-flex align-items-center justify-content-center">
                     <img class="Cap_Comm" src="../ressource/capureMesage.png"  alt="capture commentaire">
                 </div>
@@ -219,18 +292,18 @@
                         <H1 class="title">Espace <br>  commentaire </H1>
                         <h6>404.io vous aide  à resoudre l’ensemble de vos <br> problèmes. Possédant une grande base de <br> connaissances notamment alimentée par vous,<br> nous vous proposons un maximum de solutions. </h6>
                         <div>
-                            <div class="icone_comDIV d-flex">
+                            <div class="icone_comDIV d-flex mt-4">
                                 <img class="icone_com" src="../ressource/Frame.png" alt="icone_com">
                                 <p>Nous mettons  à votre disposition un espace commentaire  - <br> présent  sous chaque fiche réponse. Cet espace  vous permettra <br> d’échanger avec la communauté.</p>
                             </div>
                         </div>
                     </div>
-                 </div>
+                </div>
             </div>
     </section>
 
     <section class=fiche>
-            <div class="row">
+            <div class="row flex-wrap">
                 <div class="fiche_div1 col d-flex align-items-center justify-content-center">
                     <div>
                         <div class="mini-title">
@@ -239,7 +312,7 @@
                         <H1 class="title">Proposer votre <br>  fiche réponse </H1>
                         <h6>Notre base vous aide à trouver les solutions à vos <br> problèmes, de plus elle tend à s’agrandir. Ainsi, via la <br> proposition de fiches, vous nous aiderez à faire <br> évoluer le site. </h6>
                         <div>
-                            <div class="icone_comDIV d-flex">
+                            <div class="icone_comDIV d-flex mt-4">
                                 <img class="icone_Fic" src="../ressource/Icon_Ed.png" alt="icone_Fiche">
                                 <p class="ms-3">En plus de la proposition de fiche, 404.io vous permet de <br> modifier des solutions existantes - si vous les trouvez <br> incomplètes ou erronées.</p>
                             </div>
@@ -272,9 +345,9 @@
                 <H1 class="title_center">Avantages</H1>
             </div>
             
-            <div class="col d-flex align-items-center justify-content-center">
-                <div class="aventage_div1">
-                    <div class="row">
+            <div class="col d-flex align-items-center justify-content-center mt-5 flex-wrap container">
+                <div class="aventage_div1 ">
+                    <div class="d-flex mt-3">
                         <div class="icone_aven">
                             <img alt="icone_lign1_col1" src="../ressource/recueil-icon.png">
                         </div>
@@ -283,7 +356,7 @@
                             <p>Notre recueil de fiches solutions est en constante expension <br> et ne connait aucune limite</p>
                         </div>
                     </div>
-                    <div class="row">
+                    <div class="d-flex mt-3">
                         <div class="icone_aven">
                             <img alt="icone_lign2_col1" src="../ressource/commu-icon.png">
                         </div>
@@ -292,7 +365,7 @@
                             <p>Nous sommes une communauté soudée et à 100% <br> passionnée par l’informatique</p>
                         </div>
                     </div>
-                    <div class="row">
+                    <div class="d-flex mt-3">
                         <div class="icone_aven">
                             <img alt="icone_lign3_col1" src="../ressource/acces-icon.png">
                         </div>
@@ -305,7 +378,7 @@
                 </div>
 
                 <div class="aventage_div2 ">
-                    <div class="row">
+                    <div class="d-flex mt-3">
                         <div class="icone_aven">
                             <img alt="icone_lign1_col2" src="../ressource/verif-icon.png">
                         </div>
@@ -314,7 +387,7 @@
                             <p>Notre équipe vérifiera chaque fiche afin vous proposer des <br> solutions pertinentes qui vous feront gagner du temps</p>
                         </div>
                     </div>
-                    <div class="row">
+                    <div class="d-flex mt-3">
                         <div class="icone_aven">
                             <img alt="icone_lign2_col2" src="../ressource/startup-icon.png">
                         </div>
@@ -323,7 +396,7 @@
                             <p>Découvrez une startup unique en son genre avec un projet <br> novateur tendant à réunir les passionnés d’informatique</p>
                         </div>
                     </div>
-                    <div class="row">
+                    <div class="d-flex mt-3">
                         <div class="icone_aven">
                             <img alt="icone_lign3_col2" src="../ressource/dev-icon.png">
                         </div>
