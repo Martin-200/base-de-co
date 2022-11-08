@@ -50,6 +50,11 @@
     }
     
 
+    .icon_livre
+    {
+        margin-right: 6px;
+    }
+    
     .float-child {
         width: 50%;
         float: left;
@@ -103,6 +108,12 @@
         padding-top: 125px;
     }
 
+    .searchProblem
+    {
+        border: none;
+        width: 295px;
+    }
+
     .tecno
     {
         padding-top: 125px;
@@ -153,13 +164,17 @@
             <div class="row">
                 <div class="col d-flex align-items-center">
                     <div>
-                        <div class="mini-title">
+                        <div class="mini-title d-flex">
+                            <img class="icon_livre" src="../ressource/Vector.png">
                             <p>Base de connaissance</p>
                         </div>
                         <H1 class="radiant-title">Jamais 4 Erreurs <br> Sans 4 Solutions</H1>
                         <h6>Trouve la solution a ton erreur</h6>
-                        <form action="./pages/home/search_action.php" method="POST">
-                            <input type="search" name="searchProblem" id="searchProblem" placeholder='Rechercher'>
+                        <form class="d-flex" action="./pages/home/search_action.php" method="POST">
+                            <div id="searchProblem">
+                                <img class="icone_loupe" src="../ressource/search-icon.png">
+                                <input type="search" name="searchProblem" class="searchProblem"  placeholder='Rechercher'>
+                            </div>
                         </form>
                     </div>
                     <div class="col d-flex justify-content-end">
